@@ -1,122 +1,40 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>配達員通報フォーム</title>
-  <style>
-    body { font-family: sans-serif; padding: 1em; max-width: 600px; margin: auto; }
-    label { display: block; margin-top: 1em; }
-    textarea, input, select { width: 100%; padding: 0.5em; margin-top: 0.3em; }
-    button { margin-top: 1.5em; padding: 0.7em 1em; }
-    .result { white-space: pre-wrap; margin-top: 2em; border-top: 1px solid #ccc; padding-top: 1em; }
-  </style>
-</head>
-<body>
-  <h1>問題のある配達員 通報フォーム</h1>
-  <p style="color: red; font-weight: bold;">
-    ※ 嘘や不確かな通報は名誉毀損や嫌がらせとなる可能性がありますご注意ください。
-  </p>
+<script>
+  function generateText() {
+    const datetime = document.getElementById("datetime").value;
+    const location = document.getElementById("location").value;
+    const orderId = document.getElementById("orderId").value;
+    const vehicleType = document.getElementById("vehicleType").value;
+    const plate = document.getElementById("plate").value;
+    const bagId = document.getElementById("bagId").value;
+    const details = document.getElementById("details").value;
 
-  <form id="reportForm">
-    <label>日時（年月日と時間）:
-      <input type="datetime-local" id="datetime" required />
-    </label>
+    const issues = Array.from(document.querySelectorAll("#issues input:checked")) 
+                        .map(i => "・" + i.value).join("\n");
 
-    <label>場所（店舗名）:
-      <input type="text" id="location" required />
-    </label>
+    let report = `以下の通り問題と思われる配達員を見かけましたのでご報告いたします。\n\n`;
 
-    <label>注文番号（任意）:
-      <input type="text" id="orderId" />
-    </label>
+    report += `日時：${datetime}\n`;
+    report += `場所：${location}\n`;
+    if (orderId) report += `注文番号：${orderId}\n`;
+    report += `車両タイプ：${vehicleType}\n`;
+    report += `ナンバープレート番号：${plate}\n`;
+    if (bagId) report += `バッグの背番号：${bagId}\n\n`;
+    report += `■ 問題内容:\n${issues || "（未選択）"}\n\n`;
+    if (details) report += `■ 状況の詳細:\n${details}`;
 
-    <label>車両タイプ:
-      <select id="vehicleType" required>
-        <option value="">選択してください</option>
-        <option>自転車</option>
-        <option>バイク</option>
-        <option>軽貨物</option>
-        <option>その他</option>
-      </select>
-    </label>
-
-    <label>ナンバープレート番号:
-      <input type="text" id="plate" required />
-    </label>
-
-    <label>バッグの背番号（任意）:
-      <input type="text" id="bagId" />
-    </label>
-
-    <label>問題内容（複数選択可）:</label>
-    <div id="issues">
-      <label><input type="checkbox" value="配達バッグを使っておらず商品をバイクのシート下に入れていた" /> 商品をシート下に入れていた</label>
-      <label><input type="checkbox" value="配達バッグを使っておらずコンビニフックに掛けていた" /> 商品をコンビニフックに掛けていた</label>
-      <label><input type="checkbox" value="配達バッグを使っておらず商品をハンドルにぶら下げていた" /> 商品をハンドルにぶら下げていた</label>
-      <label><input type="checkbox" value="ナンバープレートを隠していた" /> ナンバープレートを隠していた</label>
-      <label><input type="checkbox" value="他社の商品と同時にピックしていた" /> 他社の商品と同時ピック</label>
-      <label><input type="checkbox" value="バッグが汚すぎる" /> バッグが汚すぎる</label>
-      <label><input type="checkbox" value="軽貨物ナンバーで無い車両で配達していた（警察通報済み）" /> 軽貨物ナンバーなし（通報済）</label>
-      <label><input type="checkbox" value="軽貨物ナンバーで無い車両で配達していた（警察への通報はまだしていない）" /> 軽貨物ナンバーなし（未通報）</label>
-      <label><input type="checkbox" value="登録車両と違う車両で配達していた" /> 登録車両と違う車両で配達</label>
-      <label><input type="checkbox" value="利用証が無いにも関わらず車椅子マークの思いやり駐車場に駐車していた" /> 思いやり駐車場に駐車</label>
-      <label><input type="checkbox" value="モペットで配達していた" /> モペットで配達</label>
-      <label><input type="checkbox" value="電動キックボードで配達していた" /> キックボードで配達</label>
-      <label><input type="checkbox" value="配達員からSNSで嫌がらせを受けた" /> SNSで嫌がらせを受けた</label>
-      <label><input type="checkbox" value="配達員から嫌がらせを受けた" /> 嫌がらせを受けた</label>
-      <label><input type="checkbox" value="その他" /> その他</label>
-    </div>
-
-    <label>状況の詳細（任意）:
-      <textarea id="details" rows="4"></textarea>
-    </label>
-
-    <button type="button" onclick="generateText()">テキストを生成</button>
-    <button id="copyBtn" style="display:none; margin-left: 1em;">テキストをコピー</button>
-    
-  </form>
-
-  <div class="result" id="output"></div>
-
-  <script>
-    function generateText() {
-      const datetime = document.getElementById("datetime").value;
-      const location = document.getElementById("location").value;
-      const orderId = document.getElementById("orderId").value;
-      const vehicleType = document.getElementById("vehicleType").value;
-      const plate = document.getElementById("plate").value;
-      const bagId = document.getElementById("bagId").value;
-      const details = document.getElementById("details").value;
-
-      const issues = Array.from(document.querySelectorAll("#issues input:checked")) 
-                          .map(i => "・" + i.value).join("\n");
-
-      let report = `以下の通り問題と思われる配達員を見かけましたのでご報告いたします。\n\n`;
-
-      report += `日時：${datetime}\n`;
-      report += `場所：${location}\n`;
-      if (orderId) report += `注文番号：${orderId}\n`;
-      report += `車両タイプ：${vehicleType}\n`;
-      report += `ナンバープレート番号：${plate}\n`;
-      if (bagId) report += `バッグの背番号：${bagId}\n\n`;
-      report += `■ 問題内容:\n${issues || "（未選択）"}\n\n`;
-      if (details) report += `■ 状況の詳細:\n${details}`;
-
-      document.getElementById("output").textContent = report;
-    }
     document.getElementById("output").textContent = report;
-document.getElementById("copyBtn").style.display = "inline-block";  //
-    document.getElementById("copyBtn").addEventListener("click", function () {
-  const text = document.getElementById("output").textContent;
-  if (text) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert("テキストをコピーしました！");
-    }).catch(err => {
-      alert("コピーに失敗しました：" + err);
-    });
+
+    document.getElementById("copyBtn").style.display = "inline-block";
   }
-});
-  </script>
-</body>
-</html>
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    const text = document.getElementById("output").textContent;
+    if (text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("テキストをコピーしました！");
+      }).catch(err => {
+        alert("コピーに失敗しました：" + err);
+      });
+    }
+  });
+</script>

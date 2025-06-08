@@ -73,6 +73,7 @@
     </label>
 
     <button type="button" onclick="generateText()">テキストを生成</button>
+    <button id="copyBtn" style="dispray:none; margin-left: 1em;">テキストをコピー</button>
   </form>
 
   <div class="result" id="output"></div>
@@ -87,7 +88,7 @@
       const bagId = document.getElementById("bagId").value;
       const details = document.getElementById("details").value;
 
-      const issues = Array.from(document.querySelectorAll("#issues input:checked"))
+      const issues = Array.from(document.querySelectorAll("#issues input:checked")) 
                           .map(i => "・" + i.value).join("\n");
 
       let report = `以下の通り問題と思われる配達員を見かけましたのでご報告いたします。\n\n`;

@@ -102,10 +102,8 @@
     if (details) report += `■ 状況の詳細:\n${details}`;
 
     document.getElementById("output").textContent = report;
-
     document.getElementById("copyBtn").style.display = "inline-block";
   }
-
   document.getElementById("copyBtn").addEventListener("click", function () {
     const text = document.getElementById("output").textContent;
     if (text) {

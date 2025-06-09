@@ -14,7 +14,8 @@
 </head>
 <body>
   <h1>問題のある配達員 通報フォーム</h1>
-  <p align="left">文字の入力やチェックを行い最後の「テキストの生成」を押すと、その下にテキストが表示されます。テキストをコピーしてチャットなどに貼付けご使用ください。</p>
+  <p align="left">文字の入力やチェックを行い最後の「テキストの生成」を押すと、その下にテキストが表示されます。テキストをコピーしてチャットなどに貼付けご使用ください。
+  </p>
   <p style="color: red; font-weight: bold;">
     ※ 嘘や不確かな通報は名誉毀損や嫌がらせとなる可能性がありますのでご注意ください。
   </p>
@@ -70,13 +71,14 @@
     </div>
 
     <label>状況の詳細（任意）:
-      <textarea id="details" rows="4"></textarea>
+      <textarea id="details" rows="4" inputmode="text" lang=ja" autocapitalize="none" autocomplete="off" autocorrect="off"></textarea>
     </label>
 
     <button type="button" onclick="generateText()">テキストを生成</button>
   </form>
-    <button id="copyBtn" style="display: none; margin-left: 1em;">テキストをコピー</button>
-  <div class="result" id="output"></div>
+  <div style="text-align: right;">
+    <button id="copyBtn" style="display: none; ">テキストをコピー</button>
+  </div>
 
   <script>
   function generateText() {

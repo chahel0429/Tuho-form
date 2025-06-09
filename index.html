@@ -53,7 +53,17 @@
     </label>
 
     <label>問題内容（複数選択可）:</label>
-    <div id="issues">
+    <style>
+      .checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+}
+.checkbox-group input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+    </style>
+    <div id="issues" class="checkbox-group">
       <label><input type="checkbox" value="配達バッグを使っておらず商品をバイクのシート下に入れていた" /> 商品をシート下に入れていた</label>
       <label><input type="checkbox" value="配達バッグを使っておらずコンビニフックに掛けていた" /> 商品をコンビニフックに掛けていた</label>
       <label><input type="checkbox" value="配達バッグを使っておらず商品をハンドルにぶら下げていた" /> 商品をハンドルにぶら下げていた</label>

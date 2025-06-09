@@ -78,31 +78,42 @@
   <div class="result" id="output"></div>
 
   <script>
-    function generateText() {
-      const datetime = document.getElementById("datetime").value;
-      const location = document.getElementById("location").value;
-      const orderId = document.getElementById("orderId").value;
-      const vehicleType = document.getElementById("vehicleType").value;
-      const plate = document.getElementById("plate").value;
-      const bagId = document.getElementById("bagId").value;
-      const details = document.getElementById("details").value;
+  function generateText() {
+    const datetime = document.getElementById("datetime").value;
+    const location = document.getElementById("location").value;
+    const orderId = document.getElementById("orderId").value;
+    const vehicleType = document.getElementById("vehicleType").value;
+    const plate = document.getElementById("plate").value;
+    const bagId = document.getElementById("bagId").value;
+    const details = document.getElementById("details").value;
 
-      const issues = Array.from(document.querySelectorAll("#issues input:checked"))
-                          .map(i => "・" + i.value).join("\n");
+    const issues = Array.from(document.querySelectorAll("#issues input:checked")) 
+                        .map(i => "・" + i.value).join("\n");
 
-      let report = `以下の通り問題と思われる配達員を見かけましたのでご報告いたします。\n\n`;
+    let report = `以下の通り問題と思われる配達員を見かけましたのでご報告いたします。\n\n`;
 
-      report += `日時：${datetime}\n`;
-      report += `場所：${location}\n`;
-      if (orderId) report += `注文番号：${orderId}\n`;
-      report += `車両タイプ：${vehicleType}\n`;
-      report += `ナンバープレート番号：${plate}\n`;
-      if (bagId) report += `バッグの背番号：${bagId}\n\n`;
-      report += `■ 問題内容:\n${issues || "（未選択）"}\n\n`;
-      if (details) report += `■ 状況の詳細:\n${details}`;
+    report += `日時：${datetime}\n`;
+    report += `場所：${location}\n`;
+    if (orderId) report += `注文番号：${orderId}\n`;
+    report += `車両タイプ：${vehicleType}\n`;
+    report += `ナンバープレート番号：${plate}\n`;
+    if (bagId) report += `バッグの背番号：${bagId}\n\n`;
+    report += `■ 問題内容:\n${issues || "（未選択）"}\n\n`;
+    if (details) report += `■ 状況の詳細:\n${details}`;
 
-      document.getElementById("output").textContent = report;
+    document.getElementById("output").textContent = report;
+
+    document.getElementById("copyBtn").style.display = "inline-block";
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    const text = document.getElementById("output").textContent;
+    if (text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("テキストをコピーしました！");
+      }).catch(err => {
+        alert("コピーに失敗しました：" + err);
+      });
     }
-  </script>
-</body>
-</html>
+  });
+</script>

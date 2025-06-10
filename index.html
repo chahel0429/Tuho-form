@@ -15,7 +15,7 @@
 </head>
 <body>
   <h1>問題のある配達員 通報フォーム</h1>
-  <p align="left">文字の入力やチェックを行い最後の「テキストの生成」を押すと、その下にテキストが表示されます。テキストをコピーしてチャットなどに貼付けご使用ください。
+  <p align="left">文字の入力やチェックを行い最後の「テキストの生成」を押すと、その下に文書化されたテキストが表示されます。テキストをコピーしてチャットなどに貼付けご使用ください。
   </p>
   <p style="color: red; font-weight: bold;">
     ※ 嘘や不確かな通報は名誉毀損や嫌がらせとなる可能性があります。ご注意ください。
@@ -137,18 +137,21 @@ button:hover {
     </style>
     
     <div id="issues" class="checkbox-group">
-      <label><input type="checkbox" value="配達バッグを使っておらず商品をバイクのシート下に入れていた" /> 商品をシート下に入れていた</label>
-      <label><input type="checkbox" value="配達バッグを使っておらずコンビニフックに掛けていた" /> 商品をコンビニフックに掛けていた</label>
-      <label><input type="checkbox" value="配達バッグを使っておらず商品をハンドルにぶら下げていた" /> 商品をハンドルにぶら下げていた</label>
+      <label><input type="checkbox" value="配達バッグを使っておらず商品をバイクのシート下に入れていた" /> ノーバッグで商品をシート下に入れていた</label>
+      <label><input type="checkbox" value="配達バッグを使っておらずコンビニフックに掛けていた" /> ノーバッグで商品をコンビニフックに掛けていた</label>
+      <label><input type="checkbox" value="配達バッグを使っておらず商品をハンドルにぶら下げていた" /> ノーバッグで商品をハンドルにぶら下げていた</label>
+            <label><input type="checkbox" value="配達バッグを持っているのに商品をバイクのシート下に入れていた" /> バッグあるのに商品をシート下に入れていた</label>
+      <label><input type="checkbox" value="配達バッグを持っているのにコンビニフックに掛けていた" /> バッグあるの商品をコンビニフックに掛けていた</label>
+      <label><input type="checkbox" value="配達バッグを持っているのに商品をハンドルにぶら下げていた" /> バッグあるの商品をハンドルにぶら下げていた</label>
       <label><input type="checkbox" value="ナンバープレートを隠していた" /> ナンバープレートを隠していた</label>
       <label><input type="checkbox" value="他社の商品と同時にピックしていた" /> 他社の商品と同時ピック</label>
       <label><input type="checkbox" value="バッグが汚すぎる" /> バッグが汚すぎる</label>
-      <label><input type="checkbox" value="軽貨物ナンバーで無い車両で配達していた（警察通報済み）" /> 軽貨物ナンバーなし（通報済）</label>
-      <label><input type="checkbox" value="軽貨物ナンバーで無い車両で配達していた（警察への通報はまだしていない）" /> 軽貨物ナンバーなし（未通報）</label>
+      <label><input type="checkbox" value="軽貨物ナンバーで無い車両で配達していた（警察通報済み）" /> 白ナンバー車（通報済）</label>
+      <label><input type="checkbox" value="軽貨物ナンバーで無い車両で配達していた（警察への通報はまだしていない）" /> 白ナンバー車（未通報）</label>
       <label><input type="checkbox" value="登録車両と違う車両で配達していた" /> 登録車両と違う車両で配達</label>
       <label><input type="checkbox" value="利用証が無いにも関わらず車椅子マークの思いやり駐車場に駐車していた" /> 思いやり駐車場に駐車</label>
       <label><input type="checkbox" value="モペットで配達していた" /> モペットで配達</label>
-      <label><input type="checkbox" value="電動キックボードで配達していた" /> キックボードで配達</label>
+      <label><input type="checkbox" value="電動キックボードで配達していた" /> 電動キックボードで配達</label>
       <label><input type="checkbox" value="配達員からSNSで嫌がらせを受けた" /> SNSで嫌がらせを受けた</label>
       <label><input type="checkbox" value="配達員から嫌がらせを受けた" /> 嫌がらせを受けた</label>
       <label><input type="checkbox" id="otherCheckbox" value="その他" /> その他</label>
